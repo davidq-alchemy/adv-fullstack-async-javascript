@@ -67,7 +67,8 @@ export const eatFood = (foods: ReadonlyArray<Food>): Promise<Belly> => {
  * work.
  */
 export const properCook = (): Promise<ReadonlyArray<Food>> => {
-  return Promise.resolve([])
+  const cookedFoodPromises: Array<Promise<Food>> = kittyCrunch.map(cook);
+  return Promise.all(cookedFoodPromises);
 }
 
 export const incompleteCook = async (): Promise<ReadonlyArray<Food>> => {

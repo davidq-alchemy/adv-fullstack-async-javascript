@@ -59,7 +59,9 @@ const tap1 = <A>(f: (a: A) => void): (a: A) => A => {
  * work.
  */
 export const eatFood = (foods: ReadonlyArray<Food>): Promise<Belly> => {
-  return Promise.resolve({nutrients: 0})
+  return foods.reduce((bellyPromise: Promise<Belly>, food: Food): Promise<Belly> => {
+    return bellyPromise.then(belly => gobbleFood(food, belly))
+  }, Promise.resolve({ nutrients: 0 }))
 }
 
 /**
